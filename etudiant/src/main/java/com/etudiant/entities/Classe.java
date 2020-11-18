@@ -31,7 +31,7 @@ public class Classe {
 
 	
 	
-	public Classe() {}
+	
 	
 	
 	public Classe(String nomClasse, List<Etudiant> etudiants) {

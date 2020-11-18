@@ -58,7 +58,7 @@ public class Etudiant {
 	}
 	@Override
 	public String toString() {
-		return "Produit [id=" + id + ", nom=" + nom + ", moy=" + moy + ", date=" + date + "]";
+		return "Etudiant [id=" + id + ", nom=" + nom + ", moy=" + moy + ", date=" + date + "]";
 	}
 	
 	

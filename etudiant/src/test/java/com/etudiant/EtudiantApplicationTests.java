@@ -73,7 +73,7 @@ class EtudiantApplicationTests {
 	System.out.println(etuds.getTotalPages());
 	etuds.getContent().forEach(p -> {System.out.println(p.toString());
 	 });
-	/*ou bien
+	/*ou bien 
 	for (Produit p : prods)
 	{
 	System.out.println(p);
