@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 layout:decorator="template">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+	<meta charset="utf-8">
+	<title>Ajouter des Etudiants</title>
+</head>
+<body>
+	<div layout:fragment="Mycontent">
+		<div class="container mt-5">
+			<div class="card">
+	 			<div class="card-header">
+	 				Modifier des Etudiants
+				</div>
+	 		<div class="card-body">
+				<form th:action="@{saveEtudiant}" method="post">
+					<div class="form-group">
+					<label class="control-label" hidden> ID Etudiant :</label>
+					 <input type="hidden" name="id" class="form-control"
+					th:value="${produit.idProduit}" />
+					</div>
+					<div class="form-group">
+					<label class="control-label">Nom Etudiant :</label>
+					<input type="text" name="nom" class="form-control"
+					th:value="${etudiant.nom}" />
+					<span th:errors= ${etudiant.nom} class="text-danger">
+					</span>
+					</div>
+					<div class="form-group">
+					<label class="control-label">Moyenne Etudiant :</label>
+					 <input type="text" name="moy" class="form-control"
+					th:value="${etudiant.moy}" />
+					 <span th:errors=${etudiant.moy} class="text-danger">
+					</span>
+					</div>
+					<div class="form-group">
+					<label class="control-label">date Naissance :</label>
+					<input type="date" name="date" class="form-control"
+					th:value="${etudiant.date}"/>
+					<span th:errors=${etudiant.date} class="text-danger">
+					</span>
+					</div>
+					<div>
+					<button type="submit" class="btn btn-primary">Valider</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

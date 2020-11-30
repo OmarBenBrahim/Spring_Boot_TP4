@@ -6,11 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,15 @@ public class EtudiantController {
 
 	@Autowired
 	EtudiantService etudiantService;
+	
+	@RequestMapping("/showCreate")
+	public String showCreate(ModelMap modelMap)
+	{
+	modelMap.addAttribute("etudiant", new Etudiant());
+	modelMap.addAttribute("mode", "new");
+	return "formEtudiant";
+	}
+	
 	@RequestMapping("/AjoutEtudiant")
 	public String showCreate()
 	{
@@ -30,7 +42,14 @@ public class EtudiantController {
 	}
 
 	@RequestMapping("/saveEtudiant")
-	public String saveEtudiant(@RequestParam("date") String date,@RequestParam("nom") String nom,@RequestParam("moy") double moy , ModelMap modelMap) throws ParseException {
+	public String saveProduit(@Valid Etudiant etudiant, BindingResult bindingResult)
+	{
+	if (bindingResult.hasErrors()) return "formEtudiant";
+	 etudiantService.saveEtudiant(etudiant);
+	 return "formEtudiant";
+	}
+
+	/*public String saveEtudiant(@RequestParam("date") String date,@RequestParam("nom") String nom,@RequestParam("moy") double moy , ModelMap modelMap) throws ParseException {
 		//conversion de la date
 		 SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 		 Date dateCreation = dateformat.parse(String.valueOf(date));
@@ -44,8 +63,8 @@ public class EtudiantController {
 		String msg ="etudiant enregistré avec Id "+saveEtudiant.getId();
 		modelMap.addAttribute("msg", msg);
 		return "AjoutEtudiant";
-		
-	}
+		*/
+	
 	
 	@RequestMapping("/ListeEtudiant")
 	public String listeetudiants(ModelMap modelMap,
@@ -82,7 +101,8 @@ public class EtudiantController {
 	{
 	Etudiant e= etudiantService.getEtudiant(id);
 	modelMap.addAttribute("e", e);
-	return "editProduit";
+	modelMap.addAttribute("mode", "edit");
+	return "formProduit";
 	}
 	
 	@RequestMapping("/updateEtudiant")
