@@ -35,12 +35,20 @@ public class EtudiantController {
 	return "formEtudiant";
 	}
 	
+	
 	@RequestMapping("/AjoutEtudiant")
 	public String showCreate()
 	{
 	return "AjoutEtudiant";
 	}
-
+	
+	/*@RequestMapping("/saveEtudiant")
+	public String saveEtudiant(@ModelAttribute("etudiant") Etudiant etudiant)
+	{
+	etudiantService.saveEtudiant(etudiant);
+	return "createEtudiant";
+	}*/
+	
 	@RequestMapping("/saveEtudiant")
 	public String saveProduit(@Valid Etudiant etudiant, BindingResult bindingResult)
 	{
@@ -48,6 +56,8 @@ public class EtudiantController {
 	 etudiantService.saveEtudiant(etudiant);
 	 return "formEtudiant";
 	}
+	
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
 	/*public String saveEtudiant(@RequestParam("date") String date,@RequestParam("nom") String nom,@RequestParam("moy") double moy , ModelMap modelMap) throws ParseException {
 		//conversion de la date
@@ -69,7 +79,7 @@ public class EtudiantController {
 	@RequestMapping("/ListeEtudiant")
 	public String listeetudiants(ModelMap modelMap,
 			@RequestParam (name="page",defaultValue = "0") int page,
-			@RequestParam (name="size", defaultValue = "2") int size
+			@RequestParam (name="size", defaultValue = "5") int size
 			)
 	{
 		Page<Etudiant> etud = etudiantService.getAllEtudiantsParPage(page, size);
@@ -100,9 +110,9 @@ public class EtudiantController {
 	public String editerEtudiant(@RequestParam("id") Long id,ModelMap modelMap)
 	{
 	Etudiant e= etudiantService.getEtudiant(id);
-	modelMap.addAttribute("e", e);
+	modelMap.addAttribute("etudiant", e);
 	modelMap.addAttribute("mode", "edit");
-	return "formProduit";
+	return "formEtudiant";
 	}
 	
 	@RequestMapping("/updateEtudiant")
